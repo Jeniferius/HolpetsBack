@@ -20,3 +20,10 @@ exports.insert = ({user, password, nombre, apellidos, fecha_nac, email, direccio
 		});
 	});
 }
+
+exports.login = ({ user, password }, done) => {
+	db.get().query(`SELECT user, password FROM users WHERE user='${user}' AND password='${password}'`, (err, result) => {
+		if (err) return done(err.message);
+		done(null, result);
+	});
+}

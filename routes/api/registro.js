@@ -13,7 +13,6 @@ router.post('/', (req, res) => {
         console.log(req.body);
         modelUsuario.insert(req.body, (err, result) => {
                 if (err) return console.log(err);
-                console.log(result);
                 res.json(result);
         });
 
