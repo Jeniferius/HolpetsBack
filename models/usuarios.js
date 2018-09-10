@@ -2,12 +2,11 @@ const db = require('../db');
 
 exports.getAll = (done) => {
 
-	db.get().query('SELECT * FROM alumno', (err, rows) => {
+	db.get().query('SELECT * FROM users', (err, rows) => {
 		if (err) return done(err)
 		done(null, rows)
 	})
 }
-
 
 exports.insert = ({user, password, nombre, apellidos, fecha_nac, email, direccion, ser_cuidador, cuidar_disponibilidad, cuidar_tipo_mascota, nombre_mascota, raza, fecha_nac_mascota, peso, fotos}, done)=>{
 	
@@ -25,5 +24,12 @@ exports.login = ({ user, password }, done) => {
 	db.get().query(`SELECT user, password FROM users WHERE user='${user}' AND password='${password}'`, (err, result) => {
 		if (err) return done(err.message);
 		done(null, result);
+	});
+}
+
+exports.getAllCuidadores = (done) => {
+	db.get().query('SELECT * FROM users WHERE ser_cuidador=1', (err, rows) => {
+		if (err) return done(err)
+		done(null, rows)
 	});
 }

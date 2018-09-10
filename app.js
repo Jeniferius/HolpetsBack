@@ -8,6 +8,7 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/api/usuarios');
 var registroRouter = require('./routes/api/registro');
+var buscadoroRouter = require('./routes/api/buscador');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/registro', registroRouter);
 app.use('/api/usuarios', usuariosRouter);
+app.use('/api/buscador', buscadoroRouter);
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
