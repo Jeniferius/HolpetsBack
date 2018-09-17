@@ -8,9 +8,9 @@ exports.getAll = (done) => {
 	})
 }
 
-exports.insert = ({user, password, nombre, apellidos, fecha_nac, email, direccion, ser_cuidador, cuidar_disponibilidad, cuidar_tipo_mascota, nombre_mascota, raza, fecha_nac_mascota, peso, fotos}, done)=>{
+exports.insert = ({user, password, nombre, apellidos, fecha_nac, email, direccion, longitud, latitud, ser_cuidador, cuidar_disponibilidad, cuidar_tipo_mascota, nombre_mascota, raza, fecha_nac_mascota, peso, fotos}, done)=>{
 	
-	db.get().query('INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?)', [null, user, password, nombre, apellidos, fecha_nac, email, direccion, ser_cuidador, cuidar_disponibilidad, cuidar_tipo_mascota], (err, result) => {
+	db.get().query('INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)', [null, user, password, nombre, apellidos, fecha_nac, email, direccion, longitud, latitud, ser_cuidador, cuidar_disponibilidad, cuidar_tipo_mascota], (err, result) => {
 		if (err) return done(err.message);
 
 		db.get().query('INSERT INTO mascotas VALUES (?,?,?,?,?,?,?)', [null, nombre_mascota, raza, fecha_nac_mascota, peso, fotos, result.insertId], (err, result) => {
@@ -30,6 +30,6 @@ exports.login = ({ user, password }, done) => {
 exports.getAllCuidadores = (done) => {
 	db.get().query('SELECT * FROM users WHERE ser_cuidador=1', (err, rows) => {
 		if (err) return done(err)
-		done(null, rows)
+		done(null, rows);
 	});
 }
